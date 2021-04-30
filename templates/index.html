@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Problems</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1>Problem editor</h1>
+
+    <form action="/" method="POST">
+        <input type="text" name="content" id="content">
+        <input type="submit" value="Add problem">
+    </form>
+
+    <br>
+
+    <h1>Problems</h1>
+
+    <table>
+        {% if problems != [] %}
+            {% for problem in problems %}
+            <tr>
+                <td>Author<br/>
+                    <b>{{ problem.date_created.date() }}</b>
+                </td>
+                <td>
+                    {{ problem.content }}
+                </td>
+                <td>
+                    <a href="/delete/{{problem.id}}">Delete</a>
+                    <br>
+                    <a href="/update/{{problem.id}}">Update</a>
+                </td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            There no problems
+        {% endif %}
+    </table>
+</div>
+{% endblock %}
